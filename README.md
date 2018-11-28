@@ -28,7 +28,8 @@ var failure = function() {
 
 katsini.currentLocation(success, failure);
 
-katsini.stoptLocation();
+// Stop location service
+katsini.stopLocation();
 ```
 
 Install iOS or Android platform
