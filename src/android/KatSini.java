@@ -63,8 +63,9 @@ public class KatSini extends CordovaPlugin implements GPSListener {
         this.callbackContext = callbackContext;
         if (action.equals("currentLocation")) {
             gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
-            cordova.setActivityResultCallback(this);
             gpsLocation.startLocationUpdates();
+            cordova.setActivityResultCallback(this);
+
 
             return true;
 
@@ -105,7 +106,6 @@ public class KatSini extends CordovaPlugin implements GPSListener {
                 switch (resultCode) {
                     case Activity.RESULT_OK:
                         android.util.Log.e(TAG, "User agreed to make required location settings changes.");
-                        callbackContext.error("Location Enable");
                         // Nothing to do. startLocationupdates() gets called in onResume again.
                         break;
                     case Activity.RESULT_CANCELED:
