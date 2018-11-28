@@ -25,6 +25,9 @@ import com.google.android.gms.tasks.Task;
 import com.location.plugin.GPSListener;
 import android.widget.Toast;
 import org.apache.cordova.PluginResult;
+import android.app.Activity;
+import android.content.Intent;
+import org.apache.cordova.CordovaPlugin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,12 +55,15 @@ public class KatSini extends CordovaPlugin implements GPSListener {
     private GPSLocation gpsLocation;
     private CallbackContext callbackContext;
 
+    public static final int REQUEST_CHECK_SETTINGS = 100;
+
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         this.callbackContext = callbackContext;
         if (action.equals("currentLocation")) {
             gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
+            cordova.setActivityResultCallback(this);
             gpsLocation.startLocationUpdates();
 
             return true;
@@ -88,5 +94,29 @@ public class KatSini extends CordovaPlugin implements GPSListener {
     @Override
     public void onDestroy() {
         gpsLocation.stopLocationUpdates();
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+
+        switch (requestCode) {
+            // Check for the integer request code originally supplied to startResolutionForResult().
+            case REQUEST_CHECK_SETTINGS:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        android.util.Log.e(TAG, "User agreed to make required location settings changes.");
+                        callbackContext.error("Location Enable");
+                        // Nothing to do. startLocationupdates() gets called in onResume again.
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        android.util.Log.e(TAG, "User chose not to make required location settings changes." );
+                        callbackContext.error("Access Denied");
+                        // mRequestingLocationUpdates = false;
+                        break;
+                }
+                break;
+        }
+        // Handle other results if exists.
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
