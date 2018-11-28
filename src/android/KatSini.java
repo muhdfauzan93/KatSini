@@ -69,16 +69,15 @@ public class KatSini extends CordovaPlugin implements GPSListener {
 
         this.callbackContext = callbackContext;
 
-        switch (action){
-            case "currentLocation":
-                gpsLocation.startLocationUpdates();
-                cordova.setActivityResultCallback(this);
-                return true;
-            case "stopLocation":
-                gpsLocation.stopLocationUpdates();
-                return true;
-            default:
-                return false;
+        if (action.equals("currentLocation")) {
+            gpsLocation.startLocationUpdates();
+            cordova.setActivityResultCallback(this);
+            return true;
+        } else if (action.equals("stopLocation")){
+            gpsLocation.stopLocationUpdates();
+            return true;
+        } else {
+            return false;
         }
     }
 
