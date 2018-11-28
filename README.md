@@ -26,7 +26,7 @@ var failure = function() {
   alert('Error calling KatSini Plugin');
 };
 
-katsini.greet(success, failure);
+katsini.currentLocation(success, failure);
 ```
 
 Install iOS or Android platform
