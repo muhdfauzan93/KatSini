@@ -26,6 +26,7 @@ var failure = function() {
   alert('Error calling KatSini Plugin');
 };
 
+// Start location service
 katsini.currentLocation(success, failure);
 
 // Stop location service
