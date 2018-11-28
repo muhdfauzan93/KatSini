@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-katsini",
+  "version": "0.1.0",
+  "description": "Cordova Location Using Google Play Location Service",
+  "cordova": {
+    "id": "cordova-plugin-katsini",
+    "platforms": [
+      "android",
+      "ios",
+      "wp7"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhdfauzan93/KatSini.git"
+  },
+  "keywords": [
+    "cordova",
+    "plugin",
+    "location",
+    "ecosystem:cordova",
+    "cordova-android",
+    "google play location",
+    "google play service"
+  ],
+  "author": "Muhd Fauzan",
+  "license": "Apache-2",
+  "bugs": {
+    "url": "https://github.com/muhdfauzan93/KatSini/issues"
+  },
+  "homepage": "https://github.com/muhdfauzan93/KatSini#readme"
+}

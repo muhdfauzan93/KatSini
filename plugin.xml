@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="com.location.plugin"
+        version="0.7.0">
+  <name>KatSini</name>
+
+  <engines>
+    <engine name="cordova" version=">=7.1.0"/>
+  </engines>
+
+  <asset src="www/katsini.js" target="js/katsini.js"/>
+
+  <js-module src="www/katsini.js" name="katsini">
+    <clobbers target="katsini" />
+  </js-module>
+
+  <platform name="android">
+
+    <framework src="com.google.android.gms:play-services-location:16.0.0" />
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="KatSini">
+        <param name="android-package" value="com.location.plugin.KatSini"/>
+      </feature>
+    </config-file>
+
+    <source-file src="src/android/KatSini.java" target-dir="src/com/example/plugin/"/>
+    <source-file src="src/android/GPSLocation.java" target-dir="src/com/example/plugin/"/>
+    <source-file src="src/android/GPSListener.java" target-dir="src/com/example/plugin/"/>
+
+    <config-file target="AndroidManifest.xml" parent="/*">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+      <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    </config-file>
+
+
+  </platform>
+
+  <platform name="ios">
+    
+    <config-file target="config.xml" parent="/widget">
+      <feature name="Hello">
+        <param name="ios-package" value="HWPHello" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/HWPHello.h" target-dir="HelloPlugin"/>
+    <source-file src="src/ios/HWPHello.m" target-dir="HelloPlugin"/>
+  </platform>
+
+  <platform name="wp7">
+    <source-file src="src/wp7/Hello.cs"/>
+  </platform>
+
+</plugin>
