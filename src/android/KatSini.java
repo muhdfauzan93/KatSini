@@ -58,17 +58,23 @@ public class KatSini extends CordovaPlugin implements GPSListener {
     public static final int REQUEST_CHECK_SETTINGS = 100;
 
     @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
+        android.util.Log.e(TAG, "initialize: ");
+    }
+
+    @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         this.callbackContext = callbackContext;
-        gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
 
         switch (action){
             case "currentLocation":
                 gpsLocation.startLocationUpdates();
                 cordova.setActivityResultCallback(this);
                 return true;
-            case "stopGps":
+            case "stopLocation":
                 gpsLocation.stopLocationUpdates();
                 return true;
             default:

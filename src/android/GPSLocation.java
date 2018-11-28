@@ -132,6 +132,7 @@ public class GPSLocation {
                 .addOnCompleteListener((Activity) context, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        android.util.Log.e(TAG, "Location updates stopped!");
                         // Log.e(TAG, "Location updates stopped!");
                         // Toast.makeText(context, "Location updates stopped!", Toast.LENGTH_SHORT).show();
                     }

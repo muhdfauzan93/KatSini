@@ -9,5 +9,8 @@ module.exports = {
       'currentLocation',
       []
     );
+  },
+  stopLocation: function(successCallback, errorCallback) {
+    cordova.exec(successCallback, errorCallback, 'KatSini', 'stopLocation', []);
   }
 };
