@@ -1,4 +1,4 @@
-# KatSini - Cordova plug in location for android
+# KatSini - Cordova plugin location for android
 
 Simple plugin to get current user location using Google Play Service.
 
