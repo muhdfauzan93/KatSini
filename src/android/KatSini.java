@@ -57,7 +57,7 @@ public class KatSini extends CordovaPlugin implements GPSListener {
 
         this.callbackContext = callbackContext;
         if (action.equals("currentLocation")) {
-            gpsLocation = new GPSLocation(this.cordova.getActivity(), Hello.this);
+            gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
             gpsLocation.startLocationUpdates();
 
             return true;
