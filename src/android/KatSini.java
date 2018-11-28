@@ -61,18 +61,18 @@ public class KatSini extends CordovaPlugin implements GPSListener {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
 
         this.callbackContext = callbackContext;
-        if (action.equals("currentLocation")) {
-            gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
-            gpsLocation.startLocationUpdates();
-            cordova.setActivityResultCallback(this);
+        gpsLocation = new GPSLocation(this.cordova.getActivity(), KatSini.this);
 
-
-            return true;
-
-        } else {
-
-            return false;
-
+        switch (action){
+            case "currentLocation":
+                gpsLocation.startLocationUpdates();
+                cordova.setActivityResultCallback(this);
+                return true;
+            case "stopGps":
+                gpsLocation.stopLocationUpdates();
+                return true;
+            default:
+                return false;
         }
     }
 
@@ -81,9 +81,9 @@ public class KatSini extends CordovaPlugin implements GPSListener {
         gpsLocation.stopLocationUpdates();
         JSONObject location = new JSONObject();
         try{
-        location.put("latitude", latitude);
-        location.put("longitude", longitude);
-    } catch (JSONException e) {
+            location.put("latitude", latitude);
+            location.put("longitude", longitude);
+        } catch (JSONException e) {
             android.util.Log.e(TAG, "Error: "+e );
 
         }
@@ -106,6 +106,7 @@ public class KatSini extends CordovaPlugin implements GPSListener {
                 switch (resultCode) {
                     case Activity.RESULT_OK:
                         android.util.Log.e(TAG, "User agreed to make required location settings changes.");
+                        gpsLocation.startLocationUpdates();
                         // Nothing to do. startLocationupdates() gets called in onResume again.
                         break;
                     case Activity.RESULT_CANCELED:
