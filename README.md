@@ -27,6 +27,8 @@ var failure = function() {
 };
 
 katsini.currentLocation(success, failure);
+
+katsini.stoptLocation();
 ```
 
 Install iOS or Android platform
