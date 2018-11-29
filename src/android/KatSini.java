@@ -52,7 +52,7 @@ public class KatSini extends CordovaPlugin implements GPSListener {
     // than your app can handle
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
 
-    private GPSLocation gpsLocation;
+    private GPSLocation gpsLocation = null;
     private CallbackContext callbackContext;
 
     public static final int REQUEST_CHECK_SETTINGS = 100;
@@ -74,7 +74,9 @@ public class KatSini extends CordovaPlugin implements GPSListener {
             cordova.setActivityResultCallback(this);
             return true;
         } else if (action.equals("stopLocation")){
-            gpsLocation.stopLocationUpdates();
+            if (gpsLocation!=null) {
+                gpsLocation.stopLocationUpdates();
+            }
             return true;
         } else {
             return false;
@@ -83,7 +85,7 @@ public class KatSini extends CordovaPlugin implements GPSListener {
 
     @Override
     public void setLocation(double latitude, double longitude) {
-        gpsLocation.stopLocationUpdates();
+        // gpsLocation.stopLocationUpdates();
         JSONObject location = new JSONObject();
         try{
             location.put("latitude", latitude);

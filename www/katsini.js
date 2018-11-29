@@ -10,7 +10,7 @@ module.exports = {
       []
     );
   },
-  stopLocation: function() {
+  stopLocation: function(successCallback, errorCallback) {
     cordova.exec(successCallback, errorCallback, 'KatSini', 'stopLocation', []);
   }
 };
