@@ -6,7 +6,7 @@ Simple plugin to get current user location using Google Play Service.
 
 Create a new Cordova Project
 
-    $ cordova create hello com.example.helloapp Hello
+    $ cordova create katsini com.location.katsini katsini
 
 Install the plugin
 
@@ -22,15 +22,19 @@ var success = function(location) {
   );
 };
 
-var failure = function() {
-  alert('Error calling KatSini Plugin');
+var failure = function(message) {
+  if (message === 'Access Denied') {
+    alert('Please allow Google Play Service Location');
+  } else {
+    alert('Error calling KatSini Plugin');
+  }
 };
 
 // Start location service
 katsini.currentLocation(success, failure);
 
 // Stop location service
-katsini.stopLocation();
+katsini.stopLocation(success, failure);
 ```
 
 Install iOS or Android platform
@@ -45,5 +49,3 @@ Run the code
 ## More Info
 
 For more information on setting up Cordova see [the documentation](http://cordova.apache.org/docs/en/latest/guide/cli/index.html)
-
-For more info on plugins see the [Plugin Development Guide](http://cordova.apache.org/docs/en/latest/guide/hybrid/plugins/index.html)
